@@ -1,0 +1,121 @@
+<div class="container mt-5">
+  <form class="needs-validation" [formGroup]="signupForm" novalidate>
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input
+        [ngClass]="{
+          'is-invalid': formGroup['name'].touched && formGroup['name'].errors,
+          'is-valid': formGroup['name'].valid
+        }"
+        formControlName="name"
+        type="text"
+        class="form-control"
+        id="name"
+        aria-describedby="userName"
+      />
+      <div
+        *ngIf="formGroup['name'].touched && formGroup['name'].errors"
+        class="invalid-feedback"
+      >
+        <div *ngIf="formGroup['name'].hasError('required')">
+          Name is required!
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input
+        [ngClass]="{
+          'is-invalid': formGroup['email'].touched && formGroup['email'].errors,
+          'is-valid': formGroup['email'].valid
+        }"
+        formControlName="email"
+        type="email"
+        class="form-control"
+        id="email"
+      />
+      <div
+        *ngIf="formGroup['email'].touched && formGroup['email'].errors"
+        class="invalid-feedback"
+      >
+        <div *ngIf="formGroup['email'].hasError('required')">
+          Email is required!
+        </div>
+        <div *ngIf="formGroup['email'].hasError('email')">invalid format</div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input
+        [ngClass]="{
+          'is-invalid':
+            formGroup['password'].touched && formGroup['password'].errors,
+          'is-valid': formGroup['password'].valid
+        }"
+        formControlName="password"
+        type="password"
+        class="form-control"
+        id="password"
+        aria-describedby="passwordHelpBlock"
+      />
+      <div id="passwordHelpBlock" class="form-text">
+        Your password must be minimum 8 characters long, contains atleast one
+        uppercase letter,one lowercase letter , one number and one special
+        character.
+      </div>
+      <div class="valid-feedback">Looks good!</div>
+      <div
+        *ngIf="formGroup['password'].touched && formGroup['password'].errors"
+        class="invalid-feedback"
+      >
+        <div *ngIf="formGroup['password'].hasError('required')">
+          Password is required!
+        </div>
+        <div *ngIf="formGroup['password'].hasError('pattern')">
+          invalid Password
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="confirmPassword" class="form-label">Confirm password</label>
+      <input
+        [ngClass]="{
+          'is-invalid':
+            formGroup['confirmPassword'].touched &&
+            (formGroup['confirmPassword'].errors ||
+              signupForm.hasError('passwordMatch')),
+          'is-valid':
+            formGroup['confirmPassword'].valid &&
+            !signupForm.hasError('passwordMatch')
+        }"
+        formControlName="confirmPassword"
+        type="password"
+        class="form-control"
+        id="confirmPassword"
+      />
+      <div
+        *ngIf="
+          formGroup['confirmPassword'].touched &&
+          (formGroup['confirmPassword'].errors ||
+            signupForm.hasError('passwordMatch'))
+        "
+        class="invalid-feedback"
+      >
+        <div *ngIf="formGroup['confirmPassword'].hasError('required')">
+          Password is required!
+        </div>
+        <div *ngIf="signupForm.hasError('passwordMatch')">
+          Password doesn't match
+        </div>
+      </div>
+    </div>
+
+    <button
+      [disabled]="!signupForm.valid"
+      type="button"
+      class="btn btn-primary"
+    >
+      Submit
+    </button>
+  </form>
+</div>
