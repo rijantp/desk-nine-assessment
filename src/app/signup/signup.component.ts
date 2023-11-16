@@ -10,6 +10,7 @@ import {
 import { matchPassword } from './validators/match-password.validator'
 import { Router } from '@angular/router'
 import { PASSWORD_REGEX } from './constants/password-regex.constants'
+import { PHONE_NUMBER_REGEX } from '../shared/constants/phone-number-regex.constant'
 
 @Component({
   selector: 'app-signup',
@@ -26,6 +27,10 @@ export class SignupComponent {
     {
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
+      phoneNumber: [
+        '',
+        [Validators.required, Validators.pattern(PHONE_NUMBER_REGEX)],
+      ],
       password: ['', [Validators.required, Validators.pattern(PASSWORD_REGEX)]],
       confirmPassword: ['', [Validators.required]],
     },

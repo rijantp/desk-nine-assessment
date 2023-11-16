@@ -44,6 +44,37 @@
         <div *ngIf="formGroup['email'].hasError('email')">invalid format</div>
       </div>
     </div>
+
+    <div class="mb-3">
+      <label for="phoneNumber" class="form-label">Phone number</label>
+      <input
+        [ngClass]="{
+          'is-invalid':
+            formGroup['phoneNumber'].touched && formGroup['phoneNumber'].errors,
+          'is-valid': formGroup['phoneNumber'].valid
+        }"
+        formControlName="phoneNumber"
+        type="text"
+        class="form-control"
+        id="phoneNumber"
+        aria-describedby="phoneNumberHelpBlock"
+      />
+      <div id="phoneNumberHelpBlock" class="form-text">must be 10 digit</div>
+      <div
+        *ngIf="
+          formGroup['phoneNumber'].touched && formGroup['phoneNumber'].errors
+        "
+        class="invalid-feedback"
+      >
+        <div *ngIf="formGroup['phoneNumber'].hasError('required')">
+          phone number is required!
+        </div>
+        <div *ngIf="formGroup['phoneNumber'].hasError('pattern')">
+          invalid format
+        </div>
+      </div>
+    </div>
+
     <div class="mb-3">
       <label for="password" class="form-label">Password</label>
       <input
