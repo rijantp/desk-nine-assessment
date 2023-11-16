@@ -8,6 +8,8 @@ import {
   AbstractControl,
 } from '@angular/forms'
 import { matchPassword } from './validators/match-password.validator'
+import { Router } from '@angular/router'
+import { PASSWORD_REGEX } from './constants/password-regex.constants'
 
 @Component({
   selector: 'app-signup',
@@ -18,20 +20,13 @@ import { matchPassword } from './validators/match-password.validator'
 })
 export class SignupComponent {
   fb: FormBuilder = inject(FormBuilder)
+  router: Router = inject(Router)
 
   signupForm: FormGroup = this.fb.nonNullable.group(
     {
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(
-            /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
-          ),
-        ],
-      ],
+      password: ['', [Validators.required, Validators.pattern(PASSWORD_REGEX)]],
       confirmPassword: ['', [Validators.required]],
     },
     { validators: [matchPassword] }
@@ -39,5 +34,9 @@ export class SignupComponent {
 
   get formGroup(): { [key: string]: AbstractControl } {
     return this.signupForm.controls
+  }
+
+  onSignup(): void {
+    this.router.navigate(['/login'])
   }
 }

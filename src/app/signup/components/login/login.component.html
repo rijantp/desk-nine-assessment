@@ -1,1 +1,64 @@
-<p>login works!</p>
+<div class="container mt-5">
+  <form class="needs-validation" [formGroup]="loginForm" novalidate>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input
+        [ngClass]="{
+          'is-invalid': formGroup['email'].touched && formGroup['email'].errors,
+          'is-valid': formGroup['email'].valid
+        }"
+        formControlName="email"
+        type="email"
+        class="form-control"
+        id="email"
+      />
+      <div
+        *ngIf="formGroup['email'].touched && formGroup['email'].errors"
+        class="invalid-feedback"
+      >
+        <div *ngIf="formGroup['email'].hasError('required')">
+          Email is required!
+        </div>
+        <div *ngIf="formGroup['email'].hasError('email')">invalid format</div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input
+        [ngClass]="{
+          'is-invalid':
+            formGroup['password'].touched && formGroup['password'].errors,
+          'is-valid': formGroup['password'].valid
+        }"
+        formControlName="password"
+        type="password"
+        class="form-control"
+        id="password"
+        aria-describedby="passwordHelpBlock"
+      />
+
+      <div
+        *ngIf="formGroup['password'].touched && formGroup['password'].errors"
+        class="invalid-feedback"
+      >
+        <div *ngIf="formGroup['password'].hasError('required')">
+          Password is required!
+        </div>
+        <div *ngIf="formGroup['password'].hasError('pattern')">
+          invalid Password
+        </div>
+      </div>
+    </div>
+    <button
+      [disabled]="!loginForm.valid"
+      type="button"
+      class="btn btn-primary"
+      (click)="onLogin()"
+    >
+      Login
+    </button>
+    <button type="button" class="btn btn-link" (click)="generatePassword()">
+      forgot password
+    </button>
+  </form>
+</div>
