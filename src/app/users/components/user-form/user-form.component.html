@@ -1,0 +1,130 @@
+<div class="container mt-5">
+  <form class="needs-validation w-100" [formGroup]="userForm" novalidate>
+    <div class="card">
+      <ng-container *ngIf="userForm.value.imageUrl; else blank">
+        <img
+          [src]="userForm.value.imageUrl"
+          class="card-img-top"
+          alt="profile"
+        />
+      </ng-container>
+      <div class="card-body">
+        <p class="card-text">Name : {{ userForm.value.name | uppercase }}</p>
+        <p class="card-text">Email : {{ userForm.value.email }}</p>
+        <p class="card-text">Phone : {{ userForm.value.phoneNumber }}</p>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input
+        [ngClass]="{
+          'is-invalid': formGroup['name'].touched && formGroup['name'].errors,
+          'is-valid': formGroup['name'].valid
+        }"
+        formControlName="name"
+        type="text"
+        class="form-control"
+        id="name"
+        aria-describedby="userName"
+      />
+      <div
+        *ngIf="formGroup['name'].touched && formGroup['name'].errors"
+        class="invalid-feedback"
+      >
+        <div *ngIf="formGroup['name'].hasError('required')">
+          Name is required!
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input
+        [ngClass]="{
+          'is-invalid': formGroup['email'].touched && formGroup['email'].errors,
+          'is-valid': formGroup['email'].valid
+        }"
+        formControlName="email"
+        type="email"
+        class="form-control"
+        id="email"
+      />
+      <div
+        *ngIf="formGroup['email'].touched && formGroup['email'].errors"
+        class="invalid-feedback"
+      >
+        <div *ngIf="formGroup['email'].hasError('required')">
+          Email is required!
+        </div>
+        <div *ngIf="formGroup['email'].hasError('email')">invalid format</div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="phoneNumber" class="form-label">Phone number</label>
+      <input
+        [ngClass]="{
+          'is-invalid':
+            formGroup['phoneNumber'].touched && formGroup['phoneNumber'].errors,
+          'is-valid': formGroup['phoneNumber'].valid
+        }"
+        formControlName="phoneNumber"
+        type="text"
+        class="form-control"
+        id="phoneNumber"
+        aria-describedby="phoneNumberHelpBlock"
+      />
+      <div id="phoneNumberHelpBlock" class="form-text">must be 10 digit</div>
+      <div
+        *ngIf="
+          formGroup['phoneNumber'].touched && formGroup['phoneNumber'].errors
+        "
+        class="invalid-feedback"
+      >
+        <div *ngIf="formGroup['phoneNumber'].hasError('required')">
+          phone number is required!
+        </div>
+        <div *ngIf="formGroup['phoneNumber'].hasError('pattern')">
+          invalid format
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="image" class="form-label">image</label>
+      <input
+        [ngClass]="{
+          'is-invalid': formGroup['dummy'].touched && formGroup['image'].errors,
+          'is-valid': formGroup['image'].valid
+        }"
+        (change)="onImageUpload($event)"
+        type="file"
+        class="form-control"
+        id="image"
+        formControlName="dummy"
+      />
+      <div class="form-text">must be between 500kb and 1mb</div>
+      <div
+        *ngIf="formGroup['dummy'].touched && formGroup['image'].errors"
+        class="invalid-feedback"
+      >
+        <div *ngIf="formGroup['image'].hasError('required')">
+          profile photo is required!
+        </div>
+        <div *ngIf="formGroup['image'].hasError('invalidUpload')">
+          invalid format
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-primary me-3">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="onSubmit()">
+      Submit
+    </button>
+  </form>
+</div>
+<ng-template #blank>
+  <div
+    style="width: 120px; aspect-ratio: 1"
+    class="bg-secondary-subtle rounded"
+  ></div>
+</ng-template>
