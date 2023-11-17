@@ -17,8 +17,4 @@ export class UsersComponent {
   addUser(user: UserFormValueInterface): void {
     this.usersList = [user, ...this.usersList]
   }
-
-  scroll(el: HTMLElement) {
-    el.scrollIntoView({ behavior: 'smooth' })
-  }
 }

@@ -8,7 +8,7 @@ export function validatePhoto(
   if (!file) {
     return null
   } else if (
-    file.size > 50000 &&
+    file.size > 500000 &&
     file.size < 1000000 &&
     images.includes(file.type)
   ) {
