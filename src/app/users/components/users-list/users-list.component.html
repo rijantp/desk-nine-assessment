@@ -7,7 +7,7 @@
   <div class="row gap-3 justify-content-center">
     <div class="card col-12 col-md-3" *ngFor="let user of usersList">
       <ng-container *ngIf="user.imageUrl; else blank">
-        <img [src]="user.imageUrl" class="card-img-top" alt="profile" />
+        <img [src]="user.imageUrl" class="card-img-top mx-auto" alt="profile" />
       </ng-container>
       <div class="card-body">
         <p class="card-text">Name : {{ user.name | uppercase }}</p>
@@ -19,5 +19,5 @@
 </div>
 
 <ng-template #blank>
-  <div class="bg-secondary-subtle rounded blank-frame"></div>
+  <div class="bg-secondary-subtle rounded blank-frame mx-auto"></div>
 </ng-template>
