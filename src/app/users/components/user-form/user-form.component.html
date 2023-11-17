@@ -1,19 +1,23 @@
 <div class="container mt-5">
-  <form class="needs-validation w-100" [formGroup]="userForm" novalidate>
-    <div class="card">
-      <ng-container *ngIf="userForm.value.imageUrl; else blank">
-        <img
-          [src]="userForm.value.imageUrl"
-          class="card-img-top"
-          alt="profile"
-        />
-      </ng-container>
-      <div class="card-body">
-        <p class="card-text">Name : {{ userForm.value.name | uppercase }}</p>
-        <p class="card-text">Email : {{ userForm.value.email }}</p>
-        <p class="card-text">Phone : {{ userForm.value.phoneNumber }}</p>
+  <div class="container">
+    <div class="row">
+      <div class="card col-12 col-md-6">
+        <ng-container *ngIf="userForm.value.imageUrl; else blank">
+          <img
+            [src]="userForm.value.imageUrl"
+            class="card-img-top"
+            alt="profile"
+          />
+        </ng-container>
+        <div class="card-body">
+          <p class="card-text">Name : {{ userForm.value.name | uppercase }}</p>
+          <p class="card-text">Email : {{ userForm.value.email }}</p>
+          <p class="card-text">Phone : {{ userForm.value.phoneNumber }}</p>
+        </div>
       </div>
     </div>
+  </div>
+  <form class="needs-validation w-100" [formGroup]="userForm" novalidate>
     <div class="mb-3">
       <label for="name" class="form-label">Name</label>
       <input
@@ -116,15 +120,19 @@
       </div>
     </div>
 
-    <button type="button" class="btn btn-primary me-3">Cancel</button>
-    <button type="button" class="btn btn-primary" (click)="onSubmit()">
+    <button type="button" class="btn btn-primary me-3" (click)="onCancel()">
+      Cancel
+    </button>
+    <button
+      [disabled]="!userForm.valid"
+      type="button"
+      class="btn btn-primary"
+      (click)="onSubmit()"
+    >
       Submit
     </button>
   </form>
 </div>
 <ng-template #blank>
-  <div
-    style="width: 120px; aspect-ratio: 1"
-    class="bg-secondary-subtle rounded"
-  ></div>
+  <div class="bg-secondary-subtle rounded blank-frame"></div>
 </ng-template>

@@ -42,7 +42,6 @@ export class UserFormComponent {
   onImageUpload(event: Event): void {
     const files: FileList | null = (event.target as HTMLInputElement).files
     const file = files !== null ? files[0] : null
-    console.log(file)
     this.userForm.patchValue({ image: file })
     this.userForm.controls['image'].updateValueAndValidity()
     const reader = new FileReader()
@@ -55,6 +54,10 @@ export class UserFormComponent {
   }
 
   onSubmit(): void {
-    console.log(this.userForm.value)
+    this.formSubmitEvent.emit(this.userForm.value)
+    this.userForm.reset()
+  }
+  onCancel(): void {
+    this.userForm.reset()
   }
 }
