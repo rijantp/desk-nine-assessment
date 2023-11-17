@@ -2,7 +2,12 @@
   <div class="container">
     <div class="row">
       <div class="card col-12 col-md-6">
-        <ng-container *ngIf="userForm.value.imageUrl; else blank">
+        <ng-container
+          *ngIf="
+            userForm.value.imageUrl && formGroup['image'].valid;
+            else blank
+          "
+        >
           <img
             [src]="userForm.value.imageUrl"
             class="card-img-top"
@@ -115,7 +120,7 @@
           profile photo is required!
         </div>
         <div *ngIf="formGroup['image'].hasError('invalidUpload')">
-          invalid format
+          invalid format, image must be between 500kb and 1mb
         </div>
       </div>
     </div>

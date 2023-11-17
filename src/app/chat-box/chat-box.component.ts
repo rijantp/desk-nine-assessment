@@ -1,6 +1,7 @@
 import { Component, signal, computed } from '@angular/core'
 import { CommonModule, DatePipe } from '@angular/common'
 import { FormsModule } from '@angular/forms'
+import { ChatMessageInterface } from './types/chat-message.interface'
 
 @Component({
   selector: 'app-chat-box',
@@ -51,11 +52,8 @@ export class ChatBoxComponent {
     ])
     this.secondUserText = ''
   }
-}
 
-interface ChatMessageInterface {
-  createdAt: number
-  text: string
-  userName: string
-  id: number
+  trackByUserId(index: number, message: ChatMessageInterface) {
+    return message.id
+  }
 }

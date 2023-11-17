@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-body overflow-y-auto">
       <div
-        *ngFor="let message of chatListSig()"
+        *ngFor="let message of chatListSig(); trackBy: trackByUserId"
         [ngClass]="{
           'alert-warning': message.id === 1,
           'alert-success': message.id === 2
