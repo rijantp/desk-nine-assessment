@@ -22,6 +22,8 @@ export class LoginComponent {
   fb: FormBuilder = inject(FormBuilder)
   router: Router = inject(Router)
 
+  showAlert: boolean = false
+
   loginForm: FormGroup = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.pattern(PASSWORD_REGEX)]],
@@ -39,5 +41,10 @@ export class LoginComponent {
     const generatedPassword = LoginUtility.generatePassword()
     this.formGroup['password'].setValue(generatedPassword)
     this.formGroup['password'].updateValueAndValidity()
+
+    this.showAlert = true
+    setTimeout(() => {
+      this.showAlert = false
+    }, 3000)
   }
 }

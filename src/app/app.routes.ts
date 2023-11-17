@@ -24,4 +24,9 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./users/users.component').then((m) => m.UsersComponent),
   },
+  {
+    path: 'chat',
+    loadComponent: () =>
+      import('./chat-box/chat-box.component').then((m) => m.ChatBoxComponent),
+  },
 ]

@@ -1,0 +1,67 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-body overflow-y-auto">
+      <div
+        *ngFor="let message of chatListSig()"
+        [ngClass]="{
+          'alert-warning': message.id === 1,
+          'alert-success': message.id === 2
+        }"
+        class="alert"
+        role="alert"
+      >
+        {{ message.text }}
+        <hr />
+        <div class="d-flex justify-content-between">
+          <span class="fs-6">{{ message.userName }}</span>
+          <span class="fs-6">{{ message.createdAt | date : 'h:mm a' }}</span>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="container bg-light-subtle text-emphasis-light">
+      <div class="row justify-content-between">
+        <div class="mb-3 col-12 col-md-5 d-flex align-items-center gap-3">
+          <label for="name" class="form-label text-warning text-nowrap"
+            >user 1</label
+          >
+          <input
+            type="text"
+            class="form-control bg-warning-subtle"
+            id="name"
+            aria-describedby="userName"
+            [(ngModel)]="firstUserText"
+          />
+          <button
+            [disabled]="firstUserText === ''"
+            type="button"
+            class="btn btn-warning"
+            (click)="sendFirstUserMessage()"
+          >
+            Send
+          </button>
+        </div>
+        <div class="mb-3 col-12 col-md-5 d-flex align-items-center gap-3">
+          <label for="name" class="form-label text-success text-nowrap"
+            >user 2</label
+          >
+          <input
+            type="text"
+            class="form-control bg-success-subtle"
+            id="name"
+            [(ngModel)]="secondUserText"
+            aria-describedby="userName"
+          />
+          <button
+            type="button"
+            class="btn btn-success"
+            [disabled]="secondUserText === ''"
+            (click)="sendSecondUserMessage()"
+          >
+            Send
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

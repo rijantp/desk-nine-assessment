@@ -61,4 +61,7 @@
       forgot password
     </button>
   </form>
+  <div class="alert alert-success mt-3" *ngIf="showAlert" role="alert">
+    Password generated,{{ loginForm.value.password }}
+  </div>
 </div>
